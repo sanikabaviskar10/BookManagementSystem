@@ -1,29 +1,48 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
-// import './index.css';
-// import App from './App';
-// import reportWebVitals from './reportWebVitals';
-
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
-
-// // If you want to start measuring performance in your app, pass a function
-// // to log results (for example: reportWebVitals(console.log))
-// // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();
-
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css'; // Optional if you want custom CSS
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+let books = [
+    { id: 1, title: "Book One", author: "Author One", publishedDate: "2023", publisher: "Publisher One", overview: "Overview of Book One" },
+    { id: 2, title: "Book Two", author: "Author Two", publishedDate: "2024", publisher: "Publisher Two", overview: "Overview of Book Two" },
+  ];
+  
+  export const fetchBooks = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(books);
+      }, 500);
+    });
+  };
+  
+  export const fetchBookById = (id) => {
+    return new Promise((resolve, reject) => {
+      const book = books.find((b) => b.id === parseInt(id));
+      setTimeout(() => {
+        if (book) resolve(book);
+        else reject("Book not found");
+      }, 500);
+    });
+  };
+  
+  export const saveBook = (book) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        if (book.id) 
+        {
+          books = books.map((b) => (b.id === book.id ? book : b));
+        } 
+        else 
+        {
+          book.id = books.length + 1;
+          books.push(book);
+        }
+        resolve(book);
+      }, 500);
+    });
+  };
+  export const deleteBook = (id) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        books = books.filter((b) => b.id !== id);
+        resolve();
+      }, 500);
+    });
+  };
+  
